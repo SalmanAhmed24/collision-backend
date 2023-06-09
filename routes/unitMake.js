@@ -8,4 +8,6 @@ const router = express.Router();
 const unitMakeCon = require("../controllers/unitMake");
 router.get("/", unitMakeCon.getUnitMake);
 router.post("/addUnitMake", unitMakeCon.addUnitMake);
+router.patch("/:unitMakeId", unitMakeCon.editUnitMake);
+router.delete("/:unitMakeId", unitMakeCon.deleteUnitMake);
 module.exports = router;
