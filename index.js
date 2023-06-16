@@ -10,6 +10,8 @@ app.use(cors());
 const unitMakeRoutes = require("./routes/unitMake");
 const branchRoutes = require("./routes/branch");
 const unitLocRoutes = require("./routes/unitLoc");
+const unitModRoutes = require("./routes/unitMod");
+
 const url =
   "mongodb+srv://book-a-tutorDB:reactive_007@cluster0.2art5.mongodb.net/western-collision";
 mongoose
@@ -23,6 +25,7 @@ mongoose
 app.use("/api/unitMake", unitMakeRoutes);
 app.use("/api/branch", branchRoutes);
 app.use("/api/unitLoc", unitLocRoutes);
+app.use("/api/unitMod", unitModRoutes);
 const PORT = process.env.PORT || 9000;
 app.listen(PORT, () => {
   console.log(`API listening on PORT ${PORT} `);

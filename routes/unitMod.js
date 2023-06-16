@@ -5,9 +5,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 const router = express.Router();
 // user controllers
-const unitLocCon = require("../controllers/unitLoc");
-router.get("/", unitLocCon.getunitLoc);
-router.post("/addUnitLoc", unitLocCon.addunitLoc);
-router.patch("/:unitLocId", unitLocCon.editunitLoc);
-router.delete("/:unitLocId", unitLocCon.deleteunitLoc);
+const unitModCon = require("../controllers/unitMod");
+router.get("/", unitModCon.getUnitMod);
+router.post("/addUnitMod", unitModCon.addUnitMod);
+router.patch("/:unitModId", unitModCon.editUnitMod);
+router.delete("/:unitModId", unitModCon.deleteUnitMod);
 module.exports = router;
