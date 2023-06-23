@@ -15,6 +15,7 @@ const unitJobRoutes = require("./routes/unitJob");
 const unitYearRoutes = require("./routes/unitYear");
 const unitTypeRoutes = require("./routes/unitType");
 const clientTypeRoutes = require("./routes/clientType");
+const clientRoutes = require("./routes/client");
 const url =
   "mongodb+srv://book-a-tutorDB:reactive_007@cluster0.2art5.mongodb.net/western-collision";
 mongoose
@@ -33,6 +34,7 @@ app.use("/api/unitJob", unitJobRoutes);
 app.use("/api/unitYear", unitYearRoutes);
 app.use("/api/unitType", unitTypeRoutes);
 app.use("/api/clientType", clientTypeRoutes);
+app.use("/api/client", clientRoutes);
 const PORT = process.env.PORT || 9000;
 app.listen(PORT, () => {
   console.log(`API listening on PORT ${PORT} `);
