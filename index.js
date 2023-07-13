@@ -19,6 +19,7 @@ const vendorTypeRoutes = require("./routes/vendorType");
 const clientRoutes = require("./routes/client");
 const vendorRoutes = require("./routes/vendor");
 const unitsRoutes = require("./routes/units");
+const usersRoutes = require("./routes/userRoute");
 const url =
   "mongodb+srv://book-a-tutorDB:reactive_007@cluster0.2art5.mongodb.net/western-collision";
 mongoose
@@ -41,6 +42,7 @@ app.use("/api/vendorType", vendorTypeRoutes);
 app.use("/api/client", clientRoutes);
 app.use("/api/vendor", vendorRoutes);
 app.use("/api/units", unitsRoutes);
+app.use("/api/users", usersRoutes);
 const PORT = process.env.PORT || 9000;
 app.listen(PORT, () => {
   console.log(`API listening on PORT ${PORT} `);
