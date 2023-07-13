@@ -3,8 +3,8 @@ const validator = require("mongoose-unique-validator");
 const vendorSchema = new mongoose.Schema({
   vendorName: { type: String, required: true },
   mainContact: { type: String, required: true },
-  phoneWork: { type: Number },
-  phoneMobile: { type: Number, required: true },
+  phoneWork: { type: String },
+  phoneMobile: { type: String, required: true },
   fax: { type: String },
   mainEmail: { type: String, required: true, unique: true },
   vendorType: { type: String },
