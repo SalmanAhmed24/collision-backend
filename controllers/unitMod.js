@@ -1,8 +1,9 @@
 const unitModModel = require("../models/unitModModel");
 const addUnitMod = async (req, res, next) => {
-  const { name } = req.body;
+  const { name, shortCode } = req.body;
   const createUnitModel = new unitModModel({
     name,
+    shortCode,
   });
   try {
     await createUnitModel.save();
@@ -26,7 +27,7 @@ const getUnitMod = async (req, res, next) => {
   });
 };
 const editUnitMod = async (req, res, next) => {
-  const { name } = req.body;
+  const { name, shortCode } = req.body;
   const { unitModId } = req.params;
   let unitToBeEdited;
   try {
@@ -36,6 +37,7 @@ const editUnitMod = async (req, res, next) => {
     return next(error);
   }
   unitToBeEdited.name = name;
+  unitToBeEdited.shortCode = shortCode;
   try {
     await unitToBeEdited.save();
   } catch (error) {

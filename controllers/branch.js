@@ -1,8 +1,9 @@
 const branchModel = require("../models/branchModel");
 const addBranch = async (req, res, next) => {
-  const { name } = req.body;
+  const { name, shortCode } = req.body;
   const createbranchModel = new branchModel({
     name,
+    shortCode,
   });
   try {
     await createbranchModel.save();
@@ -26,7 +27,7 @@ const getBranch = async (req, res, next) => {
   });
 };
 const editBranch = async (req, res, next) => {
-  const { name } = req.body;
+  const { name, shortCode } = req.body;
   const { branchId } = req.params;
   let unitToBeEdited;
   try {
@@ -36,6 +37,7 @@ const editBranch = async (req, res, next) => {
     return next(error);
   }
   unitToBeEdited.name = name;
+  unitToBeEdited.name = shortCode;
   try {
     await unitToBeEdited.save();
   } catch (error) {

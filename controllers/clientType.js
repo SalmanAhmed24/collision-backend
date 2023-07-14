@@ -1,8 +1,9 @@
 const clientTypeModel = require("../models/clientTypeModel");
 const addclientType = async (req, res, next) => {
-  const { name } = req.body;
+  const { name, shortCode } = req.body;
   const createclientTypeel = new clientTypeModel({
     name,
+    shortCode,
   });
   try {
     await createclientTypeel.save();
@@ -26,7 +27,7 @@ const getclientType = async (req, res, next) => {
   });
 };
 const editclientType = async (req, res, next) => {
-  const { name } = req.body;
+  const { name, shortCode } = req.body;
   const { clientTypeId } = req.params;
   let unitToBeEdited;
   try {
@@ -36,6 +37,7 @@ const editclientType = async (req, res, next) => {
     return next(error);
   }
   unitToBeEdited.name = name;
+  unitToBeEdited.shortCode = shortCode;
   try {
     await unitToBeEdited.save();
   } catch (error) {

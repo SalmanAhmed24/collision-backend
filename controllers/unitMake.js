@@ -1,8 +1,9 @@
 const unitMakeModel = require("../models/uniteMakeModel");
 const addUnitMake = async (req, res, next) => {
-  const { name } = req.body;
+  const { name, shortCode } = req.body;
   const createUnitModel = new unitMakeModel({
     name,
+    shortCode,
   });
   try {
     await createUnitModel.save();
@@ -26,7 +27,7 @@ const getUnitMake = async (req, res, next) => {
   });
 };
 const editUnitMake = async (req, res, next) => {
-  const { name } = req.body;
+  const { name, shortCode } = req.body;
   const { unitMakeId } = req.params;
   let unitToBeEdited;
   try {
@@ -36,6 +37,7 @@ const editUnitMake = async (req, res, next) => {
     return next(error);
   }
   unitToBeEdited.name = name;
+  unitToBeEdited.shortCode = shortCode;
   try {
     await unitToBeEdited.save();
   } catch (error) {
