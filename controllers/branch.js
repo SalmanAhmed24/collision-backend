@@ -37,7 +37,7 @@ const editBranch = async (req, res, next) => {
     return next(error);
   }
   unitToBeEdited.name = name;
-  unitToBeEdited.name = shortCode;
+  unitToBeEdited.shortCode = shortCode;
   try {
     await unitToBeEdited.save();
   } catch (error) {
