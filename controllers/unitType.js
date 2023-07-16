@@ -3,6 +3,7 @@ const addunitType = async (req, res, next) => {
   const { name } = req.body;
   const createUnitModel = new unitTypeModel({
     name,
+    shortCode,
   });
   try {
     await createUnitModel.save();
@@ -26,7 +27,7 @@ const getunitType = async (req, res, next) => {
   });
 };
 const editunitType = async (req, res, next) => {
-  const { name } = req.body;
+  const { name, shortCode } = req.body;
   const { unitTypeId } = req.params;
   let unitToBeEdited;
   try {
@@ -36,6 +37,7 @@ const editunitType = async (req, res, next) => {
     return next(error);
   }
   unitToBeEdited.name = name;
+  unitToBeEdited.shortCode = shortCode;
   try {
     await unitToBeEdited.save();
   } catch (error) {

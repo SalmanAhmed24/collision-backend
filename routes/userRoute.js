@@ -10,4 +10,5 @@ router.get("/", userCon.getUsers);
 router.post("/addUser", userCon.addUser);
 router.patch("/:userId", userCon.editUser);
 router.delete("/:userId", userCon.deleteUser);
+router.post("/login", userCon.loginUser);
 module.exports = router;

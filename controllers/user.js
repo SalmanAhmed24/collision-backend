@@ -90,7 +90,31 @@ const deleteUser = async (req, res, next) => {
   }
   res.status(201).json({ message: "Deleted successfully", error: false });
 };
+const loginUser = async (req, res, next) => {
+  const { username, password } = req.body;
+  let userInfo;
+  try {
+    userInfo = await userModel.findOne({
+      username: username,
+      password: password,
+    });
+  } catch (error) {
+    res.json({
+      message: "Wrong Credentials check your username or password",
+      error: true,
+    });
+  }
+  if (userInfo == null) {
+    res.json({
+      message: "Wrong Credentials check your username or password",
+      error: true,
+    });
+  } else {
+    res.json({ userInfo: userInfo.toObject({ getters: true }), error: false });
+  }
+};
 exports.addUser = addUser;
 exports.getUsers = getUsers;
 exports.editUser = editUser;
 exports.deleteUser = deleteUser;
+exports.loginUser = loginUser;
