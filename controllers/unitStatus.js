@@ -1,7 +1,7 @@
-const unitTypeModel = require("../models/unitTypeModel");
-const addunitType = async (req, res, next) => {
+const unitStatusModel = require("../models/unitStatus");
+const addunitStatus = async (req, res, next) => {
   const { name, shortCode } = req.body;
-  const createUnitModel = new unitTypeModel({
+  const createUnitModel = new unitStatusModel({
     name,
     shortCode,
   });
@@ -13,25 +13,25 @@ const addunitType = async (req, res, next) => {
   }
   res.json({ message: "Created Successfully", error: false });
 };
-const getunitType = async (req, res, next) => {
+const getunitStatus = async (req, res, next) => {
   let allUnits;
   try {
-    allUnits = await unitTypeModel.find({});
+    allUnits = await unitStatusModel.find({});
   } catch (error) {
     res.json({ message: "Error finding unit make list", error: true });
     return next(error);
   }
   res.json({
-    unitType: allUnits.map((item) => item.toObject({ getters: true })),
+    unitStatus: allUnits.map((item) => item.toObject({ getters: true })),
     error: false,
   });
 };
-const editunitType = async (req, res, next) => {
+const editunitStatus = async (req, res, next) => {
   const { name, shortCode } = req.body;
-  const { unitTypeId } = req.params;
+  const { unitStatusId } = req.params;
   let unitToBeEdited;
   try {
-    unitToBeEdited = await unitTypeModel.findById(unitTypeId);
+    unitToBeEdited = await unitStatusModel.findById(unitStatusId);
   } catch (error) {
     res.json({ message: "Could not find the unit", error: true });
     return next(error);
@@ -46,17 +46,17 @@ const editunitType = async (req, res, next) => {
   }
   res.status(201).json({ message: "Edited successfully", error: false });
 };
-const deleteunitType = async (req, res, next) => {
-  const { unitTypeId } = req.params;
+const deleteunitStatus = async (req, res, next) => {
+  const { unitStatusId } = req.params;
   try {
-    await unitTypeModel.findByIdAndRemove(unitTypeId);
+    await unitStatusModel.findByIdAndRemove(unitStatusId);
   } catch (error) {
     res.json({ message: "Could not found the specific task", error: true });
     return next(error);
   }
   res.status(201).json({ message: "Deleted successfully", error: false });
 };
-exports.addunitType = addunitType;
-exports.getunitType = getunitType;
-exports.editunitType = editunitType;
-exports.deleteunitType = deleteunitType;
+exports.addunitStatus = addunitStatus;
+exports.getunitStatus = getunitStatus;
+exports.editunitStatus = editunitStatus;
+exports.deleteunitStatus = deleteunitStatus;
