@@ -11,6 +11,7 @@ const addUnits = async (req, res, next) => {
     unitModel,
     unitJobUrgency,
     notes,
+    unitStatus,
   } = req.body;
   const createUnits = new unitsModel({
     branch,
@@ -23,6 +24,7 @@ const addUnits = async (req, res, next) => {
     unitModel,
     unitJobUrgency,
     notes,
+    unitStatus,
   });
   try {
     await createUnits.save();
@@ -58,6 +60,7 @@ const editUnit = async (req, res, next) => {
     unitModel,
     unitJobUrgency,
     notes,
+    unitStatus,
   } = req.body;
   const { unitId } = req.params;
   let unitToBeEdited;
@@ -77,6 +80,7 @@ const editUnit = async (req, res, next) => {
   unitToBeEdited.unitModel = unitModel;
   unitToBeEdited.unitJobUrgency = unitJobUrgency;
   unitToBeEdited.notes = notes;
+  unitToBeEdited.unitStatus = unitStatus;
   try {
     await unitToBeEdited.save();
   } catch (error) {

@@ -10,6 +10,7 @@ const unitsSchema = new mongoose.Schema({
   unitMake: { type: String },
   unitModel: { type: String },
   unitJobUrgency: { type: String },
+  unitStatus: [{ type: String }],
   notes: [
     {
       note: { type: String },
@@ -17,7 +18,30 @@ const unitsSchema = new mongoose.Schema({
     },
   ],
   tasks: [{ type: Object }],
-  additionalInformation: [{ type: Object }],
+  work: { type: Object },
+  parts: { type: Object },
+  $: { type: Object },
+  info: {
+    estimateDone: { type: String },
+    partsOrdered: { type: String },
+    onPremise: { type: String },
+    premiseDate: { type: String },
+    approvedDate: { type: String },
+    startDate: { type: String },
+    ecd: { type: String },
+    tearDownAssignTo: { type: String },
+    tearDownCompleteDate: { type: String },
+    bodyAssignedTo: { type: String },
+    bodyCompletedDate: { type: String },
+    paintPrepAssignTo: { type: String },
+    paintPrepCompleteDate: { type: String },
+    paintAssignTo: { type: String },
+    paintCompleteDate: { type: String },
+    inspectionAssignTo: { type: String },
+    inspectionCompleteDate: { type: String },
+    invoiceDate: { type: String },
+    deliverDate: { type: String },
+  },
 });
 // UserSchema.plugin(validator);
 module.exports = mongoose.model("units", unitsSchema);
