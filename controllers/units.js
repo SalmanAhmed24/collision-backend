@@ -99,7 +99,65 @@ const deleteUnit = async (req, res, next) => {
   }
   res.status(201).json({ message: "Deleted successfully", error: false });
 };
+const addInfo = async (req, res, next) => {
+  const { unitId } = req.params;
+  const {
+    estimateDone,
+    partsOrdered,
+    onPremise,
+    premiseDate,
+    approvedDate,
+    startDate,
+    ecd,
+    tearDownAssignTo,
+    tearDownCompleteDate,
+    bodyAssignedTo,
+    bodyCompletedDate,
+    paintPrepAssignTo,
+    paintPrepCompleteDate,
+    paintAssignTo,
+    paintCompleteDate,
+    inspectionAssignTo,
+    inspectionCompleteDate,
+    invoiceDate,
+    deliverDate,
+  } = req.body;
+  let unitToBeEdited;
+  try {
+    unitToBeEdited = await unitsModel.findById(unitId);
+  } catch (error) {
+    res.json({ message: "Could not find the unit", error: true });
+    return next(error);
+  }
+  unitToBeEdited.info.estimateDone = estimateDone;
+  unitToBeEdited.info.partsOrdered = partsOrdered;
+  unitToBeEdited.info.onPremise = onPremise;
+  unitToBeEdited.info.premiseDate = premiseDate;
+  unitToBeEdited.info.approvedDate = approvedDate;
+  unitToBeEdited.info.startDate = startDate;
+  unitToBeEdited.info.ecd = ecd;
+  unitToBeEdited.info.tearDownAssignTo = tearDownAssignTo;
+  unitToBeEdited.info.tearDownCompleteDate = tearDownCompleteDate;
+  unitToBeEdited.info.bodyAssignedTo = bodyAssignedTo;
+  unitToBeEdited.info.bodyCompletedDate = bodyCompletedDate;
+  unitToBeEdited.info.paintPrepAssignTo = paintPrepAssignTo;
+  unitToBeEdited.info.paintPrepCompleteDate = paintPrepCompleteDate;
+  unitToBeEdited.info.paintAssignTo = paintAssignTo;
+  unitToBeEdited.info.paintCompleteDate = paintCompleteDate;
+  unitToBeEdited.info.inspectionAssignTo = inspectionAssignTo;
+  unitToBeEdited.info.inspectionCompleteDate = inspectionCompleteDate;
+  unitToBeEdited.info.invoiceDate = invoiceDate;
+  unitToBeEdited.info.deliverDate = deliverDate;
+  try {
+    await unitToBeEdited.save();
+  } catch (error) {
+    res.json({ message: "Enable to edit units", error: true });
+    return next(error);
+  }
+  res.status(201).json({ message: "Edited successfully", error: false });
+};
 exports.addUnits = addUnits;
 exports.getUnits = getUnits;
 exports.editUnit = editUnit;
+exports.addInfo = addInfo;
 exports.deleteUnit = deleteUnit;

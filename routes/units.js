@@ -10,4 +10,6 @@ router.get("/", unitsCon.getUnits);
 router.post("/addUnits", unitsCon.addUnits);
 router.patch("/:unitId", unitsCon.editUnit);
 router.delete("/:unitId", unitsCon.deleteUnit);
+router.patch("/addInfo/:unitId", unitsCon.addInfo);
+
 module.exports = router;
