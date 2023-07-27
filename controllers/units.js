@@ -25,6 +25,12 @@ const addUnits = async (req, res, next) => {
     unitJobUrgency,
     notes,
     unitStatus,
+    info: [],
+    individualNotes: [],
+    tasks: [],
+    work: null,
+    parts: null,
+    $: null,
   });
   try {
     await createUnits.save();
