@@ -15,6 +15,8 @@ const unitsSchema = new mongoose.Schema({
     {
       note: { type: String },
       date: { type: String },
+      time: { type: String },
+      user: { type: String },
     },
   ],
   tasks: [{ type: Object }],

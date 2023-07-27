@@ -110,7 +110,13 @@ const loginUser = async (req, res, next) => {
       error: true,
     });
   } else {
-    res.json({ userInfo: userInfo.toObject({ getters: true }), error: false });
+    res.json({
+      userInfo: {
+        fullname: userInfo.fullname,
+        id: userInfo.toObject({ getters: true }).id,
+      },
+      error: false,
+    });
   }
 };
 exports.addUser = addUser;
