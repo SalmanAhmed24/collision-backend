@@ -156,8 +156,31 @@ const addInfo = async (req, res, next) => {
   }
   res.status(201).json({ message: "Edited successfully", error: false });
 };
+const addNotes = async (req, res, next) => {
+  const { unitId } = req.params;
+  const { note, date, time, user } = req.body;
+  let unitToBeEdited;
+  try {
+    unitToBeEdited = await unitsModel.findById(unitId);
+  } catch (error) {
+    res.json({ message: "Could not find the unit", error: true });
+    return next(error);
+  }
+  unitToBeEdited.individualNotes.note = note;
+  unitToBeEdited.individualNotes.date = date;
+  unitToBeEdited.individualNotes.time = time;
+  unitToBeEdited.individualNotes.user = user;
+  try {
+    await unitToBeEdited.save();
+  } catch (error) {
+    res.json({ message: "Enable to edit units", error: true });
+    return next(error);
+  }
+  res.status(201).json({ message: "Edited successfully", error: false });
+};
 exports.addUnits = addUnits;
 exports.getUnits = getUnits;
 exports.editUnit = editUnit;
 exports.addInfo = addInfo;
 exports.deleteUnit = deleteUnit;
+exports.addNotes = addNotes;

@@ -11,5 +11,6 @@ router.post("/addUnits", unitsCon.addUnits);
 router.patch("/:unitId", unitsCon.editUnit);
 router.delete("/:unitId", unitsCon.deleteUnit);
 router.patch("/addInfo/:unitId", unitsCon.addInfo);
+router.patch("/addIndNotes/:unitId", unitsCon.addNotes);
 
 module.exports = router;
