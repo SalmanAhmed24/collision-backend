@@ -12,5 +12,7 @@ router.patch("/:unitId", unitsCon.editUnit);
 router.delete("/:unitId", unitsCon.deleteUnit);
 router.patch("/addInfo/:unitId", unitsCon.addInfo);
 router.patch("/addIndNotes/:unitId", unitsCon.addNotes);
+router.patch("/editIndNotes/:unitId", unitsCon.editNotes);
+router.delete("/deleteNotes/:unitId&&:noteId", unitsCon.delNotes);
 
 module.exports = router;

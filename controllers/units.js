@@ -165,6 +165,24 @@ const addInfo = async (req, res, next) => {
 const addNotes = async (req, res, next) => {
   const { unitId } = req.params;
   const { note, date, time, user } = req.body;
+  try {
+    await unitsModel.updateOne(
+      { _id: unitId },
+      {
+        $push: {
+          individualNotes: { note: note, date: date, time: time, user: user },
+        },
+      }
+    );
+  } catch (error) {
+    res.json({ message: "Could not find the unit", error: true });
+    return next(error);
+  }
+  res.status(201).json({ message: "Edited successfully", error: false });
+};
+const editNotes = async (req, res, next) => {
+  const { unitId } = req.params;
+  const { note, date, time, user, id } = req.body;
   let unitToBeEdited;
   try {
     unitToBeEdited = await unitsModel.findById(unitId);
@@ -172,11 +190,36 @@ const addNotes = async (req, res, next) => {
     res.json({ message: "Could not find the unit", error: true });
     return next(error);
   }
-  unitToBeEdited.individualNotes.push({ note, date, time, user });
+  unitToBeEdited.individualNotes.forEach((i) => {
+    if (i._id == id) {
+      i.note = note;
+      i.date = date;
+      i.time = time;
+      i.user = user;
+    }
+  });
   try {
     await unitToBeEdited.save();
   } catch (error) {
     res.json({ message: "Enable to edit units", error: true });
+    return next(error);
+  }
+  res.status(201).json({ message: "Edited successfully", error: false });
+};
+const delNotes = async (req, res, next) => {
+  const { unitId, noteId } = req.params;
+  console.log("this is ind id", noteId);
+  try {
+    await unitsModel.updateOne(
+      { _id: unitId },
+      {
+        $pull: {
+          individualNotes: { _id: noteId },
+        },
+      }
+    );
+  } catch (error) {
+    res.json({ message: "Could not find the unit", error: true });
     return next(error);
   }
   res.status(201).json({ message: "Edited successfully", error: false });
@@ -187,3 +230,5 @@ exports.editUnit = editUnit;
 exports.addInfo = addInfo;
 exports.deleteUnit = deleteUnit;
 exports.addNotes = addNotes;
+exports.editNotes = editNotes;
+exports.delNotes = delNotes;

@@ -15,6 +15,7 @@ const unitJobRoutes = require("./routes/unitJob");
 const unitYearRoutes = require("./routes/unitYear");
 const unitTypeRoutes = require("./routes/unitType");
 const clientTypeRoutes = require("./routes/clientType");
+const taskCatRoutes = require("./routes/taskCat");
 const vendorTypeRoutes = require("./routes/vendorType");
 const clientRoutes = require("./routes/client");
 const vendorRoutes = require("./routes/vendor");
@@ -45,6 +46,7 @@ app.use("/api/vendor", vendorRoutes);
 app.use("/api/units", unitsRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/unitStatus", unitStatusRoutes);
+app.use("/api/taskCat", taskCatRoutes);
 
 const PORT = process.env.PORT || 9000;
 app.listen(PORT, () => {
