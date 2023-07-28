@@ -11,14 +11,12 @@ const unitsSchema = new mongoose.Schema({
   unitModel: { type: String },
   unitJobUrgency: { type: String },
   unitStatus: [{ type: String }],
-  notes: [
-    {
-      note: { type: String },
-      date: { type: String },
-      time: { type: String },
-      user: { type: String },
-    },
-  ],
+  notes: {
+    note: { type: String },
+    date: { type: String },
+    time: { type: String },
+    user: { type: String },
+  },
   individualNotes: [
     {
       note: { type: String },
