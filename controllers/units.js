@@ -172,10 +172,7 @@ const addNotes = async (req, res, next) => {
     res.json({ message: "Could not find the unit", error: true });
     return next(error);
   }
-  unitToBeEdited.individualNotes.note = note;
-  unitToBeEdited.individualNotes.date = date;
-  unitToBeEdited.individualNotes.time = time;
-  unitToBeEdited.individualNotes.user = user;
+  unitToBeEdited.individualNotes.push({ note, date, time, user });
   try {
     await unitToBeEdited.save();
   } catch (error) {
