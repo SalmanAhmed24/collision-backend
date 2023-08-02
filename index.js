@@ -46,7 +46,7 @@ app.use("/api/vendor", vendorRoutes);
 app.use("/api/units", unitsRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/unitStatus", unitStatusRoutes);
-app.use("/api/taskCat", taskCatRoutes);
+app.use("/api/taskCategory", taskCatRoutes);
 
 const PORT = process.env.PORT || 9000;
 app.listen(PORT, () => {

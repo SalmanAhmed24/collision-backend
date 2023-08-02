@@ -22,7 +22,7 @@ const gettaskCat = async (req, res, next) => {
     return next(error);
   }
   res.json({
-    taskCat: allUnits.map((item) => item.toObject({ getters: true })),
+    taskCategory: allUnits.map((item) => item.toObject({ getters: true })),
     error: false,
   });
 };
