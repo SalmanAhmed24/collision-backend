@@ -224,6 +224,96 @@ const delNotes = async (req, res, next) => {
   }
   res.status(201).json({ message: "Edited successfully", error: false });
 };
+const addTasks = async (req, res, next) => {
+  const { unitId } = req.params;
+  const {
+    date,
+    time,
+    taskCategory,
+    dueDate,
+    assignedTo,
+    title,
+    taskDescription,
+  } = req.body;
+  try {
+    await unitsModel.updateOne(
+      { _id: unitId },
+      {
+        $push: {
+          tasks: {
+            date: date,
+            time: time,
+            taskCategory: taskCategory,
+            dueDate: dueDate,
+            assignedTo: assignedTo,
+            title: title,
+            taskDescription: taskDescription,
+          },
+        },
+      }
+    );
+  } catch (error) {
+    res.json({ message: "Could not find the unit", error: true });
+    return next(error);
+  }
+  res.status(201).json({ message: "Edited successfully", error: false });
+};
+const editTasks = async (req, res, next) => {
+  const { unitId } = req.params;
+  const {
+    date,
+    time,
+    taskCategory,
+    dueDate,
+    assignedTo,
+    title,
+    taskDescription,
+    id,
+  } = req.body;
+  let unitToBeEdited;
+  try {
+    unitToBeEdited = await unitsModel.findById(unitId);
+  } catch (error) {
+    res.json({ message: "Could not find the unit", error: true });
+    return next(error);
+  }
+  unitToBeEdited.tasks.forEach((i) => {
+    if (i._id == id) {
+      i.date = date;
+      i.time = time;
+      i.taskCategory = taskCategory;
+      i.dueDate = dueDate;
+      i.assignedTo = assignedTo;
+      i.title = title;
+      i.taskDescription = taskDescription;
+    }
+  });
+  try {
+    await unitToBeEdited.save();
+  } catch (error) {
+    res.json({ message: "Enable to edit units", error: true });
+    return next(error);
+  }
+  res.status(201).json({ message: "Edited successfully", error: false });
+};
+const deleteTasks = async (req, res, next) => {
+  const { unitId, taskId } = req.params;
+  console.log("this is unitId and taskId", unitId, taskId);
+  try {
+    await unitsModel.updateOne(
+      { _id: unitId },
+      {
+        $pull: {
+          tasks: { _id: taskId },
+        },
+      }
+    );
+  } catch (error) {
+    res.json({ message: "Could not find the unit", error: true });
+    return next(error);
+  }
+  res.status(201).json({ message: "Edited successfully", error: false });
+};
 exports.addUnits = addUnits;
 exports.getUnits = getUnits;
 exports.editUnit = editUnit;
@@ -232,3 +322,6 @@ exports.deleteUnit = deleteUnit;
 exports.addNotes = addNotes;
 exports.editNotes = editNotes;
 exports.delNotes = delNotes;
+exports.addTasks = addTasks;
+exports.editTasks = editTasks;
+exports.deleteTasks = deleteTasks;

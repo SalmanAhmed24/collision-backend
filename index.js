@@ -22,7 +22,6 @@ const vendorRoutes = require("./routes/vendor");
 const unitsRoutes = require("./routes/units");
 const usersRoutes = require("./routes/userRoute");
 const unitStatusRoutes = require("./routes/unitStatus");
-const tasksRoutes = require("./routes/tasks");
 const url =
   "mongodb+srv://book-a-tutorDB:reactive_007@cluster0.2art5.mongodb.net/western-collision";
 mongoose
@@ -48,7 +47,6 @@ app.use("/api/units", unitsRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/unitStatus", unitStatusRoutes);
 app.use("/api/taskCategory", taskCatRoutes);
-app.use("/api/tasks", tasksRoutes);
 
 const PORT = process.env.PORT || 9000;
 app.listen(PORT, () => {

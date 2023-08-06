@@ -14,5 +14,8 @@ router.patch("/addInfo/:unitId", unitsCon.addInfo);
 router.patch("/addIndNotes/:unitId", unitsCon.addNotes);
 router.patch("/editIndNotes/:unitId", unitsCon.editNotes);
 router.delete("/deleteNotes/:unitId&&:noteId", unitsCon.delNotes);
+router.patch("/addTasks/:unitId", unitsCon.addTasks);
+router.patch("/editTasks/:unitId", unitsCon.editTasks);
+router.delete("/deleteTasks/:unitId&&:taskId", unitsCon.deleteTasks);
 
 module.exports = router;

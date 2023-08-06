@@ -25,7 +25,17 @@ const unitsSchema = new mongoose.Schema({
       user: { type: String },
     },
   ],
-  tasks: [{ type: Object }],
+  tasks: [
+    {
+      date: { type: String },
+      time: { type: Object },
+      taskCategory: { type: String },
+      dueDate: { type: String },
+      assignedTo: { type: String },
+      title: { type: String },
+      taskDescription: { type: String },
+    },
+  ],
   work: { type: Object },
   parts: { type: Object },
   $: { type: Object },
